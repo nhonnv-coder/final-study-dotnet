@@ -1,0 +1,52 @@
+@model ProjectViewModel;
+
+@{
+    ViewData["Title"] = "Create project";
+}
+
+<div class="container">
+    <div class="page">
+        <h2 class="page-title fw-bold text-center">Create Project</h2>
+        <div class="page-content d-flex justify-content-center">
+            <div class="page-form">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label for="Name" class="control-label fs-5">Name <span class="text-danger">*</span></label>
+                        <input asp-for="Name" class="form-control form-control-lg" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="ImageFile" class="control-label fs-5">Background</label>
+                        <input asp-for="ImageFile" type="file" class="form-control form-control-lg" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="StartDate" class="control-label">Start Date <span class="text-danger">*</span></label>
+                        <input asp-for="StartDate" value="@(Model.StartDate.ToString("yyyy-MM-dd") ?? "")" class="form-control form-control-lg" placeholder="Y/m/d" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label for="EndDate" class="control-label fs-5">End Date <span class="text-danger">*</span></label>
+                        <input asp-for="EndDate" value="@(Model.EndDate.ToString("yyyy-MM-dd") ?? "")" class="form-control form-control-lg" laceholder="Y/m/d" />
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status" class="form-control form-control-lg" asp-items="@Model.StatusOptions"></select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-action d-flex justify-content-center mt-2">
+                        <div>
+                            <a asp-action="Index" class="btn btn-lg btn-secondary text-decoration-none px-3">Back</a>
+                        </div>
+                        <input type="submit" value="Create" class="ms-1 btn btn-lg btn-primary px-3"/>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
