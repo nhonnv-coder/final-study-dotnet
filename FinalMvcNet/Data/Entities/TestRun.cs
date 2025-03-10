@@ -6,7 +6,7 @@ public enum TestRunStatus
     Skip,
     Warning,
     Fail,
-    Pass
+    Pass,
 }
 
 public class TestRun

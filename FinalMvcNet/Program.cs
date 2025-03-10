@@ -1,5 +1,12 @@
 using FinalMvcNet.Areas.Identity.Data;
 using FinalMvcNet.Data;
+using FinalMvcNet.Models.Validators;
+using FinalMvcNet.Models.ViewModels;
+using FinalMvcNet.Repositories.Projects;
+using FinalMvcNet.Services.File;
+using FinalMvcNet.Services.Projects;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +24,20 @@ builder
         options.SignIn.RequireConfirmedAccount = true
     )
     .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddAutoMapper(typeof(Program));
+
+// Services
+builder.Services.AddTransient<IFileService, FileService>();
+builder.Services.AddTransient<IProjectService, ProjectService>();
+
+// Repositories
+builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<ProjectViewModel>();
 
 var app = builder.Build();
 

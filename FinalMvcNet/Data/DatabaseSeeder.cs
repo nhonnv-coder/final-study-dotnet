@@ -9,11 +9,28 @@ public static class DatabaseSeeder
         // Seed Projects
         if (!context.Projects.Any())
         {
-            var projects = new[]
+            var projects = new List<Project>
             {
-                new Project { Name = "Project A" },
-                new Project { Name = "Project B" },
+                new Project
+                {
+                    Name = "Project Alpha",
+                    Image = "/uploads/project-alpha.jpg",
+                    StartDate = new DateTime(2024, 1, 1),
+                    EndDate = new DateTime(2024, 12, 31),
+                    Status = ProjectStatus.Active,
+                    CreatedAt = DateTime.UtcNow,
+                },
+                new Project
+                {
+                    Name = "Project Beta",
+                    Image = "/uploads/project-beta.jpg",
+                    StartDate = new DateTime(2024, 6, 1),
+                    EndDate = new DateTime(2025, 6, 1),
+                    Status = ProjectStatus.Inactive,
+                    CreatedAt = DateTime.UtcNow,
+                },
             };
+
             context.Projects.AddRange(projects);
             context.SaveChanges();
         }
