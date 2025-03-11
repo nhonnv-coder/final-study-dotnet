@@ -2,9 +2,11 @@ using FinalMvcNet.Data;
 using FinalMvcNet.Models.ViewModels;
 using FinalMvcNet.Repositories.Projects;
 using FinalMvcNet.Repositories.Sprints;
+using FinalMvcNet.Repositories.TestSuites;
 using FinalMvcNet.Services.File;
 using FinalMvcNet.Services.Projects;
 using FinalMvcNet.Services.Sprints;
+using FinalMvcNet.Services.TestSuites;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
@@ -30,10 +32,12 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
 builder.Services.AddTransient<ISprintService, SprintService>();
+builder.Services.AddTransient<ITestSuiteService, TestSuiteService>();
 
 // Repositories
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 builder.Services.AddTransient<ISprintRepository, SprintRepository>();
+builder.Services.AddTransient<ITestSuiteRepository, TestSuiteRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -41,6 +45,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<ProjectViewModel>();
 builder.Services.AddValidatorsFromAssemblyContaining<SprintViewModel>();
+builder.Services.AddValidatorsFromAssemblyContaining<TestSuiteViewModel>();
 
 var app = builder.Build();
 
