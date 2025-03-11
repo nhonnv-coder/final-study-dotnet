@@ -1,11 +1,13 @@
 using FinalMvcNet.Data;
 using FinalMvcNet.Models.ViewModels;
 using FinalMvcNet.Services.Projects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalMvcNet.Controllers
 {
+    [Authorize]
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
