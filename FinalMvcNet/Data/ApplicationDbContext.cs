@@ -11,6 +11,17 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        
+        builder.Entity<Sprint>()
+            .HasOne(s => s.Project)
+            .WithMany(p => p.Sprints)
+            .HasForeignKey(s => s.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+
     public override int SaveChanges()
     {
         DateTimeTracking();

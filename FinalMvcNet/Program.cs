@@ -1,10 +1,10 @@
-using FinalMvcNet.Areas.Identity.Data;
 using FinalMvcNet.Data;
-using FinalMvcNet.Models.Validators;
 using FinalMvcNet.Models.ViewModels;
 using FinalMvcNet.Repositories.Projects;
+using FinalMvcNet.Repositories.Sprints;
 using FinalMvcNet.Services.File;
 using FinalMvcNet.Services.Projects;
+using FinalMvcNet.Services.Sprints;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
@@ -29,15 +29,18 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Services
 builder.Services.AddTransient<IFileService, FileService>();
 builder.Services.AddTransient<IProjectService, ProjectService>();
+builder.Services.AddTransient<ISprintService, SprintService>();
 
 // Repositories
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
+builder.Services.AddTransient<ISprintRepository, SprintRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<ProjectViewModel>();
+builder.Services.AddValidatorsFromAssemblyContaining<SprintViewModel>();
 
 var app = builder.Build();
 
